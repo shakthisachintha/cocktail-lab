@@ -2,12 +2,7 @@
 import { Cocktail } from "@/lib/types";
 import { useEffect, useState } from "react";
 import CocktailCardsContainer from "./components/CocktailCardsContainer";
-
-const fetchRandomCocktail = async () => {
-  const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-  const cocktails = await res.json() as { drinks: Cocktail[] }
-  return cocktails.drinks[0]
-}
+import { fetchRandomCocktail } from "@/lib/cocktail-db-utils";
 
 // Async generator function that yields unique cocktails
 async function* uniqueRandomCocktailsGenerator(count: number) {
