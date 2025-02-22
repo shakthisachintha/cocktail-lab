@@ -2,20 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  color-scheme: light dark;
+  --light-dark-background: light-dark(#FFFFFF, #000000);
+  --light-dark-bg-shade: light-dark(#F0F0F0, #1A1A1A);
+  --light-dark-bg-accent: light-dark(#E0E0E0, #2A2A2A);
+  --light-dark-text: light-dark(#000000, #FFFFFF);
+
+  --color-blue: #0077cc;
+  --color-blue-light: #00aaff;
+}
+
+.light-theme {
+  /* forces light color-scheme */
+  color-scheme: light;
+}
+
+.dark-theme {
+  /* forces dark color-scheme */
+  color-scheme: dark;
+}
+
+.favourite-btn {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: var(--color-blue-light);
+
+  &:hover {
+    color: var(--color-blue);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.icon-btn {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: var(--color-blue-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    color: var(--color-blue);
+    background-color: var(--light-dark-bg-accent);
+  }
+}
+
+.navbar {
+  background-color: var(--light-dark-bg-shade);
+  color: var(--light-dark-text);
+
+  .nav-link-btn {
+    padding: 0.5rem;
+    border-radius: 3rem;
+    background-color: var(--light-dark-bg-accent);
+    color: var(--light-dark-text);
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--color-blue);
+    }
+  }
 }
