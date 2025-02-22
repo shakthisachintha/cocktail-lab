@@ -1,10 +1,10 @@
 'use client';
 import { Cocktail } from '@/lib/types';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import CocktailCard from '../components/CocktailCard';
-import { getFavouritesFromSessionStorage } from '@/lib/utils';
 import { useQueries } from '@tanstack/react-query';
-
+import { fetchCocktailById } from '@/lib/cocktail-db-utils';
+import { getFavouritesFromSessionStorage } from '@/lib/utils';
 interface LoadingCocktail {
     isLoading: boolean,
     isPlaceholderData: boolean,
@@ -12,10 +12,14 @@ interface LoadingCocktail {
 }
 
 const FavouriteCocktails = () => {
-    const favouritesIds: string[] = getFavouritesFromSessionStorage();
+    const [favouriteIds, setFavouriteIds] = useState<string[]>([]);
+
+    useEffect(() => {
+        setFavouriteIds(getFavouritesFromSessionStorage());
+    }, []);
 
     const favouriteDrinks = useQueries({
-        queries: favouritesIds.map((id) => {
+        queries: favouriteIds.map((id) => {
             return {
                 queryKey: ['cocktail', id],
                 queryFn: () => fetchCocktailById(id),
@@ -30,21 +34,15 @@ const FavouriteCocktails = () => {
         data: favourite.data,
     }));
 
+    const onUnFavourite = (id: string) => {
+        setFavouriteIds((prev) => prev.filter((favId) => favId !== id));
+    }
+
     return (
         <>
-            {favourites.map(({ data }, idx) => (<CocktailCard key={`fav-cock-${idx}`} cocktail={data} />))}
+            {favourites.map(({ data }, idx) => (<CocktailCard onUnfavourite={onUnFavourite} key={`fav-cock-${idx}`} cocktail={data} />))}
         </>
     )
-}
-
-const fetchCocktailById = async (id: string): Promise<Cocktail> => {
-    const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + id);
-    const { drinks } = await res.json();
-    if (drinks) {
-        return drinks[0] as Cocktail;
-    } else {
-        throw new Error(`Drink not found for the id ${id}`);
-    }
 }
 
 export default FavouriteCocktails

@@ -3,7 +3,7 @@ import FavouriteCocktails from './FavouriteCocktails';
 import BreadCrumbs from '../components/BreadCrumbs';
 
 const FavouritesPage = () => {
-
+  
   return (
     <>
       <BreadCrumbs items={['Home', 'Favourites']} />
@@ -11,7 +11,6 @@ const FavouritesPage = () => {
         <FavouriteCocktails />
       </div>
     </>
-
   )
 }
 

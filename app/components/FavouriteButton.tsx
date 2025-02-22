@@ -8,6 +8,7 @@ import {
 
 interface Props {
     cocktailId: string;
+    onUnFavourite?: (id: string) => void;
 }
 
 function isInFavourites(cocktailId: string): boolean {
@@ -15,7 +16,7 @@ function isInFavourites(cocktailId: string): boolean {
     return favourites.includes(cocktailId);
 };
 
-const FavouriteButton = ({ cocktailId }: Props) => {
+const FavouriteButton = ({ cocktailId, onUnFavourite }: Props) => {
     const [isFavourite, setIsFavourite] = useState(false);
 
     useEffect(() => {
@@ -29,6 +30,7 @@ const FavouriteButton = ({ cocktailId }: Props) => {
         // Remove from favourites if already in favourites
         if (isFavourite) {
             newFavourites = favourites.filter((id: string) => id !== cocktailId);
+            onUnFavourite?.(cocktailId);
         } else {
             // Add to favourites if not in favourites
             newFavourites = [...favourites, cocktailId];

@@ -4,9 +4,10 @@ import FavouriteButton from './FavouriteButton'
 
 interface Props {
     cocktail?: Cocktail
+    onUnfavourite?: (id: string) => void
 }
 
-export default function CocktailCard({ cocktail }: Props) {
+export default function CocktailCard({ cocktail, onUnfavourite }: Props) {
 
     if (!cocktail) {
         return <div>Loading...</div>
@@ -20,7 +21,7 @@ export default function CocktailCard({ cocktail }: Props) {
                 <p>{cocktail.strCategory}</p>
             </div>
 
-            <FavouriteButton cocktailId={cocktail.idDrink} />
+            <FavouriteButton onUnFavourite={onUnfavourite} cocktailId={cocktail.idDrink} />
         </div>
     </div>
 }
