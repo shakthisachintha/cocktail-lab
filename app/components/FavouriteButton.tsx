@@ -41,7 +41,8 @@ const FavouriteButton = ({ cocktailId, onUnFavourite }: Props) => {
     };
 
     return (
-        <span onClick={handleClick} className='favourite-btn'>
+        <span onClick={handleClick} 
+            className='favourite-btn' role='button' aria-label='Favourite'>
             {isFavourite ? <HeartFilled /> : <HeartOutlined />}
         </span >
     );
