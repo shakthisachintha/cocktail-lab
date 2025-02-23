@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { Cocktail } from "@/lib/types"
 import FavouriteButton from './FavouriteButton'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import ImageWithFallback from './ImageWithFallback'
 
 interface Props {
     cocktail?: Cocktail
@@ -30,7 +30,7 @@ export default function CocktailCard({ cocktail, onUnfavourite }: Props) {
     }
 
     return <div className='cocktail-card'>
-        <Image className='cover-image' src={cocktail.strDrinkThumb} alt={cocktail.strDrink} width={500} height={500} />
+        <ImageWithFallback className='cover-image' src={cocktail.strDrinkThumb} alt={cocktail.strDrink} width={500} height={500} />
         <div className='flex flex-col p-5'>
             <div className='flex justify-between mb-2'>
                 <div>
