@@ -4,13 +4,14 @@ import { Cocktail } from '@/lib/types';
 import { fetchRandomCocktail } from '@/lib/cocktail-db-utils';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import CocktailCard from './components/CocktailCard';
+import GridContainer from './components/GridContainer';
 
 const NUMBER_FETCH_ITEMS = 5;
 
 export default function Home() {
   // useInfiniteQuery fetches one cocktail per "page"
   const queryClient = useQueryClient();
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Cocktail>({
+  const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching } = useInfiniteQuery<Cocktail>({
     queryKey: ['randomCocktail'],
     queryFn: async () => {
       await new Promise<void>(res => setTimeout(() => res(), 1000));
@@ -45,15 +46,27 @@ export default function Home() {
     queryClient.resetQueries({ queryKey: ['randomCocktail'] });
   };
 
+  const RefreshButton = ({ loading, onClick }: { loading: boolean, onClick: () => void }) => {
+    return (
+      <button
+        className={`btn ${loading ? 'btn-disabled' : ''}`}
+        onClick={onClick}
+        disabled={loading}
+      >
+        {loading ? "Refreshing ..." : 'Refresh'}
+      </button>
+    );
+  }
+
   return (
     <div>
-      <button
-        onClick={handleRefresh}
-        className="px-4 py-2 bg-blue-500 text-white rounded"
+      <GridContainer
+        title='Cheers to a New Cocktail 🍹'
+        description='Click the refresh button to fetch new cocktails.'
+        extras={
+          <RefreshButton loading={isLoading || isFetching} onClick={handleRefresh} />
+        }
       >
-        Refresh Cocktails
-      </button>
-      <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3'>
         {uniqueCocktails.map((cocktail: Cocktail) => (
           <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
         ))}
@@ -62,8 +75,7 @@ export default function Home() {
           .map((_, idx) => (
             <CocktailCard key={`placeholder-${idx}`} />
           ))}
-      </div>
-      {isFetchingNextPage && <div>Loading more cocktails...</div>}
+      </GridContainer>
     </div>
   );
 }

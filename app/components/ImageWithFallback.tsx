@@ -13,7 +13,7 @@ const ImageWithFallback = (props: ImageWithFallbackProps) => {
     const [imgSrc, setImgSrc] = useState(src);
 
     return (
-        <Image {...rest} src={imgSrc} onError={() => { setImgSrc(fallbackSrc || defaultFallbackSrc); }} />
+        <Image {...rest} alt={rest.alt} src={imgSrc} onError={() => { setImgSrc(fallbackSrc || defaultFallbackSrc); }} />
     );
 };
 

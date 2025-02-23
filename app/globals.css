@@ -11,7 +11,7 @@ body {
   --light-dark-background: light-dark(#FFFFFF, #000000);
   --light-dark-bg-shade: light-dark(#F0F0F0, #1A1A1A);
   --light-dark-bg-accent: light-dark(#E0E0E0, #2A2A2A);
-  
+
   --light-dark-text: light-dark(#000000, #FFFFFF);
   --light-dark-text-accent: light-dark(#5f5e5e, #ababab);
 
@@ -165,5 +165,27 @@ body {
   .main-grid {
     gap: calc(var(--default-margin) * 2);
   }
+}
 
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--default-border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: var(--font-size-medium);
+  color: var(--light-dark-text);
+  background-color: var(--light-dark-bg-accent);
+  border: 1px solid var(--light-dark-bg-accent);
+
+  &:hover {
+    background-color: var(--color-blue-light);
+    color: var(--light-dark-text);
+  }
+
+  &.btn-disabled {
+    cursor: not-allowed;
+    background-color: var(--light-dark-bg-accent);
+    color: var(--light-dark-text-accent);
+    border: 1px solid var(--light-dark-bg-accent);
+  }
 }
