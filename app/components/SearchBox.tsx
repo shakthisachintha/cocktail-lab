@@ -17,7 +17,7 @@ export const SearchBox = ({ onChange }: Props) => {
             <input
                 type="text"
                 placeholder="Search..."
-                className="input"
+                className="search-input"
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={(e) => {
                     if (e.key === "Enter" && searchTerm.current) onChange(searchTerm.current);

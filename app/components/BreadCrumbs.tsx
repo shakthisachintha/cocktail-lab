@@ -1,15 +1,32 @@
-import React from 'react'
+import { BreadCrumbPath } from '@/lib/types';
+import Link from 'next/link';
+import React from 'react';
 
-const BreadCrumbs = (items: { items: string[] }) => {
+const BreadCrumbs = ({ items }: { items: BreadCrumbPath[] }) => {
+
+    items.unshift({ label: 'Home', href: '/' });
+
     return (
-        <div className='flex items-center space-x-2 text-gray-500'>
-            {items.items.map((item, idx) => (
-                idx === items.items.length - 1 ?
-                    <div key={`bc-${idx}`} className='font-bold'>{item}</div> :
-                    <div key={`bc-${idx}`}>{item} <span>&#47;</span> </div>
-            ))}
+        <div className="breadcrumbs">
+            {items.map((item, idx) => {
+                const isLast = idx === items.length - 1;
+                return (
+                    <React.Fragment key={`breadcrumb-${idx}`}>
+                        {item.href ? (
+                            <Link href={item.href} className={isLast ? 'font-bold' : ''}>
+                                {item.label}
+                            </Link>
+                        ) : (
+                            <span className={isLast ? 'font-bold' : ''}>
+                                {item.label}
+                            </span>
+                        )}
+                        {isLast ? null : <span>&#47;</span>}
+                    </React.Fragment>
+                );
+            })}
         </div>
-    )
-}
+    );
+};
 
-export default BreadCrumbs
+export default BreadCrumbs;

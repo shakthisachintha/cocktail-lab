@@ -1,22 +1,20 @@
 import { Metadata } from 'next';
 import FavouriteCocktails from './FavouriteCocktails';
-import BreadCrumbs from '../components/BreadCrumbs';
+import GridContainer from '../components/GridContainer';
 
 const FavouritesPage = () => {
-  
+
   return (
-    <>
-      <BreadCrumbs items={['Home', 'Favourites']} />
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3'>
-        <FavouriteCocktails />
-      </div>
-    </>
+    <GridContainer title='Favourites' description='Your favourite drinks on Cocktail Labs.'
+      path={[{ label: 'Favourites' }]}>
+      <FavouriteCocktails />
+    </GridContainer>
   )
 }
 
 export default FavouritesPage
 
 export const metadata: Metadata = {
-  title: 'Cocktail Labs - Favourites',
-  description: 'Your favourite drinks on Cocktail Labs'
+  title: 'Favourites | Cocktail Labs',
+  description: 'Your favourite drinks on Cocktail Labs.'
 }

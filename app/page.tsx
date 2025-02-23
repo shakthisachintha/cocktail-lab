@@ -1,45 +1,69 @@
 'use client';
-import { Cocktail } from "@/lib/types";
-import { useEffect, useState } from "react";
-import CocktailCardsContainer from "./components/CocktailCardsContainer";
-import { fetchRandomCocktail } from "@/lib/cocktail-db-utils";
+import { useEffect } from 'react';
+import { Cocktail } from '@/lib/types';
+import { fetchRandomCocktail } from '@/lib/cocktail-db-utils';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import CocktailCard from './components/CocktailCard';
 
-// Async generator function that yields unique cocktails
-async function* uniqueRandomCocktailsGenerator(count: number) {
-  const fetchedIds = new Set<string>();
-  let attempts = 0;
-  const maxAttempts = count * 10;
+const NUMBER_FETCH_ITEMS = 5;
 
-  while (fetchedIds.size < count && attempts < maxAttempts) {
-    attempts++;
-    const cocktail = await fetchRandomCocktail();
-    if (!fetchedIds.has(cocktail.idDrink)) {
-      fetchedIds.add(cocktail.idDrink);
-      yield cocktail;
-    }
-    // Optionally, add a small delay between requests to ease server load:
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-}
 export default function Home() {
-  const [cocktails, setCocktails] = useState<Cocktail[]>([]);
+  // useInfiniteQuery fetches one cocktail per "page"
+  const queryClient = useQueryClient();
+  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<Cocktail>({
+    queryKey: ['randomCocktail'],
+    queryFn: async () => {
+      await new Promise<void>(res => setTimeout(() => res(), 1000));
+      return await fetchRandomCocktail();
+    },
+    // We'll use the page count simply to trigger the next page.
+    getNextPageParam: (lastPage, pages) => pages.length + 1,
+    initialPageParam: 1,
+    staleTime: Infinity,             // Keep data fresh indefinitely
+    refetchOnMount: false,           // Do not refetch when remounting
+    refetchOnWindowFocus: false,     // Do not refetch on window focus
+  });
 
+  // Flatten the pages into one list
+  const allCocktails: Cocktail[] = data?.pages || [];
+
+  // Filter out duplicates based on the cocktail's idDrink
+  const uniqueCocktails = allCocktails.filter(
+    (cocktail, index, self) =>
+      index === self.findIndex((c) => c.idDrink === cocktail.idDrink)
+  );
+
+  // If we don't have 5 unique cocktails yet, and we’re not already fetching, trigger the next fetch.
   useEffect(() => {
-    const loadCocktails = async () => {
-      // Using for-await-of to iterate over the generator as results become available
-      for await (const cocktail of uniqueRandomCocktailsGenerator(5)) {
-        setCocktails(prev => [...prev, cocktail]);
-      }
-    };
-    loadCocktails();
-  }, []);
+    if (uniqueCocktails.length < NUMBER_FETCH_ITEMS && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [uniqueCocktails, isFetchingNextPage, fetchNextPage]);
+
+  // Refresh button handler that resets the query, causing it to refetch
+  const handleRefresh = () => {
+    queryClient.resetQueries({ queryKey: ['randomCocktail'] });
+  };
 
   return (
     <div>
-      <div className="flex justify-end items-center">
-        {/* Optionally add a Load More button or similar */}
+      <button
+        onClick={handleRefresh}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Refresh Cocktails
+      </button>
+      <div className='grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3'>
+        {uniqueCocktails.map((cocktail: Cocktail) => (
+          <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
+        ))}
+        {new Array(NUMBER_FETCH_ITEMS - uniqueCocktails.length)
+          .fill(null)
+          .map((_, idx) => (
+            <CocktailCard key={`placeholder-${idx}`} />
+          ))}
       </div>
-      <CocktailCardsContainer data={cocktails} />
+      {isFetchingNextPage && <div>Loading more cocktails...</div>}
     </div>
   );
 }
