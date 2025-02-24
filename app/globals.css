@@ -13,14 +13,12 @@ body {
   --light-dark-bg-shade: light-dark(#F0F0F0, #1A1A1A);
   --light-dark-bg-accent: light-dark(#E0E0E0, #2A2A2A);
 
-  --light-dark-text: light-dark(#000000, #FFFFFF);
-  --light-dark-text-accent: light-dark(#5f5e5e, #ababab);
+  --light-dark-text: light-dark(#333333, #FFFFFF);
+  --light-dark-text-accent: light-dark(#7A6E5F, #CCCCCC);
 
-  /* Accent Colors - Enhanced with More Red */
-  --color-blue: #FF4136;           /* Bold red to evoke passion and energy */
-  --color-blue-light: #FF7F66;       /* Lighter red variant for softer accents */
+  --color-accent: #D32F2F;
+  --color-accent-light: #FF7F66;
 
-  /* Spacing, Border, and Typography */
   --default-padding: 1rem;
   --default-margin: 1rem;
   --default-border-radius: 0.5rem;
@@ -59,10 +57,10 @@ body {
   font-size: var(--font-size-xlarge);
   cursor: pointer;
   transition: color 0.3s;
-  color: var(--color-blue-light);
+  color: var(--color-accent-light);
 
   &:hover {
-    color: var(--color-blue);
+    color: var(--color-accent);
   }
 }
 

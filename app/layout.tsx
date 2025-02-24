@@ -15,7 +15,7 @@ const inter = Nunito({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark-theme">
       <body className={inter.variable}>
         <ThemeProvider>
           <QueryClientProvider>

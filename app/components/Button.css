@@ -21,7 +21,7 @@
     }
 
     &:hover {
-        background-color: var(--color-blue-light);
+        background-color: var(--color-accent-light);
         color: var(--light-dark-text);
     }
 
@@ -33,11 +33,11 @@
     }
 
     &.btn-blue {
-        background-color: var(--color-blue-light);
+        background-color: var(--color-accent-light);
         color: var(--light-dark-text);
 
         &:hover {
-            background-color: var(--color-blue);
+            background-color: var(--color-accent);
             color: var(--light-dark-text);
         }
     }

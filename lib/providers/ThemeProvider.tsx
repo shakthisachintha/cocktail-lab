@@ -7,10 +7,10 @@ type ThemeContextType = {
     toggleTheme: () => void;
 }
 
-export const ThemeContext = createContext<ThemeContextType>({ theme: 'light-theme', toggleTheme: () => { } });
+export const ThemeContext = createContext<ThemeContextType>({ theme: 'dark-theme', toggleTheme: () => { } });
 
 export default function ThemeProvider({ children }: React.PropsWithChildren) {
-    const [theme, setTheme] = useState<'light-theme' | 'dark-theme'>('light-theme');
+    const [theme, setTheme] = useState<'light-theme' | 'dark-theme'>('dark-theme');
 
     useEffect(() => {
         // Update the html element class to the theme
