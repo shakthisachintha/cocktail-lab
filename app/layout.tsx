@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <QueryClientProvider>
             <NavBar />
-            <main className='container mx-auto px-2'>
+            <main className='container mx-auto px-2 mb-4'>
               {children}
             </main>
             <Footer />

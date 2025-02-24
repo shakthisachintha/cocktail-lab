@@ -7,13 +7,13 @@ import './Button.css'
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     loading?: boolean,
     icon?: React.ReactNode
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
-export const Button = ({ loading, onClick, icon, children, disabled }: Props) => {
+export const Button = ({ loading, onClick, icon, children, disabled, className }: Props) => {
     const isDisabled = loading || disabled;
     return (
-        <button className={`btn ${isDisabled && 'btn-disabled'} ${(icon || loading) && 'icon-btn'}`}
+        <button className={`btn ${className} ${isDisabled && 'btn-disabled'} ${(icon || loading) && 'icon-btn'}`}
             onClick={onClick} disabled={loading}>
             {loading && <Loading3QuartersOutlined spin className='icon' />}
             {(!loading && icon) && <span className="icon">{icon}</span>}

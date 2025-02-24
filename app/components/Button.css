@@ -31,4 +31,14 @@
         color: var(--light-dark-text-accent);
         border: 1px solid var(--light-dark-bg-accent);
     }
+
+    &.btn-blue {
+        background-color: var(--color-blue-light);
+        color: var(--light-dark-text);
+
+        &:hover {
+            background-color: var(--color-blue);
+            color: var(--light-dark-text);
+        }
+    }
 }

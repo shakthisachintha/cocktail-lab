@@ -16,6 +16,7 @@
     "serach_restults_desc_2": "Search results for {1}.",
     "search_error": "An error occurred while searching for Cocktails. Please try again later.",
     "results_loading": "Loading search results...",
+    "paginated_results_desc":"Showing {1} of {2} results for \"{3}\"",
 
     "oops": "Oops!",
     "error_slug": "Things dont seem to be working at the moment",
@@ -24,5 +25,7 @@
     "not_found_slug": "We can't find the page you're looking",
 
     "foot_note_1": "Cocktail Labs. All rights reserved.",
-    "foot_note_2": "Crafted with passion for cocktail enthusiasts around the world."
+    "foot_note_2": "Crafted with passion for cocktail enthusiasts around the world.",
+
+    "mobile_pagination": "Page {1} of {2}"
 }

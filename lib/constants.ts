@@ -3,6 +3,7 @@ export const maxUserInputSize = 50;
 export const cocktailCacheStaleTimeMins = 10;
 export const searchCacheStaleTimeMins = 5;
 export const numberFetchItemsInHomePage = 5;
+export const paginationEnablePageSize = 6;
 
 export const Routes = {
     home: '/',
