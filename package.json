@@ -1,6 +1,10 @@
 {
   "name": "cocktail-lab",
   "version": "0.1.0",
+  "author": {
+    "name": "Shakthi Sachintha",
+    "email": "shakthisachintha@gmail.com"
+  },
   "type": "module",
   "private": true,
   "scripts": {
