@@ -8,7 +8,7 @@ export interface Props {
 
 export const SearchBox = ({ onChange }: Props) => {
     const searchTerm = useRef<string>('');
-    
+
     const setSearchTerm = (text: string) => {
         searchTerm.current = text;
     };
