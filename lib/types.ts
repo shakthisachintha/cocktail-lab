@@ -10,3 +10,8 @@ export type BreadCrumbPath = {
     label: string
     href?: string
 }
+
+export type ErrorProps = {
+    error?: Error & { digest?: string }
+    reset?: () => void,
+}

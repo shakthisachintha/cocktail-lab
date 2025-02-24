@@ -19,7 +19,6 @@ const GridContainer = ({ children, path, title, description, extras }: Props) =>
                     {title && <h1 className="page-title-text">{title}</h1>}
                     {description && <p className="page-desc-text">{description}</p>}
                 </div>}
-
                 {extras && extras}
             </div>
 

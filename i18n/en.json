@@ -1,5 +1,17 @@
 {
-    
     "favourites": "Favourites",
-    "favourites_desc": "Your favourite drinks on Cocktail Labs."
+    "favourites_desc": "Your favourite drinks on Cocktail Labs.",
+
+    "search": "Search",
+    "search_results": "Search Results",
+    "search_results_desc": "Showing {1} results for \"{2}\"",
+    "no_results": "No results found",
+    "serach_restults_desc_2": "Search results for {1}.",
+    "search_error": "An error occurred while searching for Cocktails. Please try again later.",
+
+    "oops": "Oops!",
+    "error_slug": "Things dont seem to be working at the moment",
+    "error_id": "Error ID: {1}",
+    "try_again": "Try Again",
+    "not_found_slug": "We can't find the page you're looking"
 }
