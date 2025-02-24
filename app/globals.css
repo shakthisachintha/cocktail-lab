@@ -79,65 +79,36 @@ body {
   color: var(--light-dark-text);
 }
 
-.search-input {
+.search-box {
   border-radius: var(--default-border-radius);
   border: 1px solid var(--light-dark-bg-accent);
-  padding: calc(var(--default-padding) / 1.5) var(--default-padding);
-  color: var(--light-dark-text);
   background-color: var(--light-dark-bg-accent);
+  display: flex;
+  align-items: center;
+  padding: calc(var(--default-padding) / 1.5) var(--default-padding);
   transition: border-color 0.3s;
-  width: 100%;
+  gap: calc(var(--default-margin) / 2);
 
-  &:focus {
+  .search-icon {
+    font-size: var(--font-size-medium);
+    color: var(--light-dark-text-accent);
+  }
+
+  .search-input {
+    background-color: transparent;
+    border: none;
     outline: none;
+    color: var(--light-dark-text);
+    transition: border-color 0.3s;
+    width: 100%;
+  }
+
+  &:focus-within {
     border-color: var(--color-blue-light);
   }
-
-  &::placeholder {
-    color: var(--light-dark-text-accent);
-  }
-
 }
 
-.cocktail-card {
-  color: var(--light-dark-text);
-  border-radius: var(--default-border-radius);
-  border: 1px solid var(--light-dark-bg-accent);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: var(--default-padding);
 
-  .cover-image {
-    height: 20rem;
-    object-fit: cover;
-    border-top-left-radius: var(--default-border-radius);
-    border-top-right-radius: var(--default-border-radius);
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  .title-text {
-    color: var(--light-dark-text);
-    font-size: var(--font-size-large);
-    font-weight: bold;
-  }
-
-  .category-text {
-    color: var(--light-dark-text-accent);
-    font-size: var(--font-size-medium);
-    margin: calc(var(--default-margin) / 2) 0;
-  }
-
-  .instruction-text {
-    color: var(--light-dark-text);
-    font-size: var(--font-size-medium);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin: var(--default-margin) 0;
-  }
-}
 
 .grid-container {
   display: flex;
@@ -185,7 +156,7 @@ body {
   }
 }
 
-.error-container{
+.error-container {
   display: flex;
   height: 75vh;
   width: 100%;

@@ -1,4 +1,6 @@
 'use client';
+import { t } from '@/i18n/locale_service';
+import { Routes, siteTitle } from '@/lib/constants';
 import { CloseOutlined, LeftOutlined, MenuOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -6,8 +8,6 @@ import { Button, LinkButton } from './Button';
 import NavSearchBox from './NavSearchBox';
 import './SideMenu.css';
 import ThemeTogleButton from './ThemeTogleButton';
-import { t } from '@/i18n/locale_service';
-import { siteTitle } from '@/lib/constants';
 
 const SideMenu = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -34,8 +34,8 @@ const SideMenu = () => {
                             </div>
                         </Link>
                         <NavSearchBox onNavigation={toggleMenu} />
-                        <LinkButton href='/' onClick={toggleMenu}>Home</LinkButton>
-                        <LinkButton href='/favourites' onClick={toggleMenu}>{t('favourites')}</LinkButton>
+                        <LinkButton href={Routes.home} onClick={toggleMenu}>{t('home')}</LinkButton>
+                        <LinkButton href={Routes.favourites} onClick={toggleMenu}>{t('favourites')}</LinkButton>
 
                         <ThemeTogleButton showText />
                     </div>

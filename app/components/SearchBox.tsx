@@ -1,4 +1,5 @@
 'use client';
+import { SearchOutlined } from '@ant-design/icons';
 import { useRef } from 'react';
 
 export interface Props {
@@ -13,7 +14,8 @@ export const SearchBox = ({ onChange }: Props) => {
     };
 
     return (
-        <div>
+        <div className='search-box'>
+            <SearchOutlined className='search-icon' />
             <input
                 type="text"
                 placeholder="Search..."

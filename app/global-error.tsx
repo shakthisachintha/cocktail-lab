@@ -1,10 +1,10 @@
 "use client";
 
+import { t } from "@/i18n/locale_service";
 import { ErrorProps } from "@/lib/types";
 import { useEffect } from "react";
-import ImageWithFallback from "./components/ImageWithFallback";
-import { t } from "@/i18n/locale_service";
 import { Button } from "./components/Button";
+import ImageWithFallback from "./components/ImageWithFallback";
 
 export default function GlobalError({ error, reset }: ErrorProps) {
   useEffect(() => {

@@ -12,7 +12,7 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 export const Button = ({ loading, onClick, icon, children, disabled }: Props) => {
     const isDisabled = loading || disabled;
     return (
-        <button className={`btn ${isDisabled && 'btn-disabled'} ${(icon || loading )&& 'icon-btn'}`}
+        <button className={`btn ${isDisabled && 'btn-disabled'} ${(icon || loading) && 'icon-btn'}`}
             onClick={onClick} disabled={loading}>
             {loading && <Loading3QuartersOutlined spin className='icon' />}
             {icon && <span className="icon">{icon}</span>}

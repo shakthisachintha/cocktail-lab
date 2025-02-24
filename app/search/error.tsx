@@ -1,4 +1,5 @@
 'use client'
+import { t } from "@/i18n/locale_service";
 import createErrorComponent from "../components/ErrorComponent";
 
-export default createErrorComponent("An error occurred while searching for cocktails. Please try again later.");
+export default createErrorComponent(t("search_error"));

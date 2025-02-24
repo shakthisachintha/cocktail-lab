@@ -2,10 +2,9 @@ import { Metadata } from 'next';
 import FavouriteCocktails from './FavouriteCocktails';
 import GridContainer from '../components/GridContainer';
 import { t } from '@/i18n/locale_service';
-import { siteTitle } from '@/lib/constants';
+import { generatePageTitle } from '@/lib/utils';
 
 const FavouritesPage = () => {
-
   return (
     <GridContainer title={t('favourites')} description={t('favourites_desc')}
       path={[{ label: t('favourites') }]}>
@@ -17,7 +16,7 @@ const FavouritesPage = () => {
 export default FavouritesPage
 
 export const metadata: Metadata = {
-  title: `${t('favourites')} | ${siteTitle}`,
+  title: generatePageTitle(t('favourites')),
   description: t('favourites_desc'),
   keywords: ['favourites', 'cocktails', 'drinks', 'alcohol'],
 }

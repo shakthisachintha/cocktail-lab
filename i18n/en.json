@@ -1,6 +1,10 @@
 {
+    "home": "Home",
+    "toggle_theme": "Toggle {1} Mode",
+
     "favourites": "Favourites",
     "favourites_desc": "Your favourite drinks on Cocktail Labs.",
+    "no_favourites": "You have no favourite drinks yet.",
 
     "search": "Search",
     "search_results": "Search Results",
@@ -8,6 +12,7 @@
     "no_results": "No results found",
     "serach_restults_desc_2": "Search results for {1}.",
     "search_error": "An error occurred while searching for Cocktails. Please try again later.",
+    "results_loading": "Loading search results...",
 
     "oops": "Oops!",
     "error_slug": "Things dont seem to be working at the moment",

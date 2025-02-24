@@ -1,8 +1,9 @@
 import { Cocktail } from "@/lib/types"
-import FavouriteButton from './FavouriteButton'
 import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import FavouriteButton from './FavouriteButton'
 import ImageWithFallback from './ImageWithFallback'
+import './CocktailCard.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 interface Props {
     cocktail?: Cocktail

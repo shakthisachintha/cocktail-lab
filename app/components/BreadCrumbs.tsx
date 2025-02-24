@@ -1,10 +1,12 @@
+import { t } from '@/i18n/locale_service';
+import { Routes } from '@/lib/constants';
 import { BreadCrumbPath } from '@/lib/types';
 import Link from 'next/link';
 import React from 'react';
 
 const BreadCrumbs = ({ items }: { items: BreadCrumbPath[] }) => {
 
-    items.unshift({ label: 'Home', href: '/' });
+    items.unshift({ label: t('home'), href: Routes.home });
 
     return (
         <div className="breadcrumbs">

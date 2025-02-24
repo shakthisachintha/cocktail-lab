@@ -5,6 +5,7 @@ import CocktailCard from '../components/CocktailCard';
 import { useQueries } from '@tanstack/react-query';
 import { fetchCocktailById } from '@/lib/cocktail-db-utils';
 import { getFavouritesFromSessionStorage } from '@/lib/utils';
+import { t } from '@/i18n/locale_service';
 interface LoadingCocktail {
     isLoading: boolean,
     isPlaceholderData: boolean,
@@ -39,11 +40,20 @@ const FavouriteCocktails = () => {
     }
 
     return (
-        <>
-            {favourites.map(({ data }, idx) => (<CocktailCard onUnfavourite={onUnFavourite} key={`fav-cock-${idx}`} cocktail={data} />))}
-        </>
+        favourites.length > 0 ?
+            favourites.map((favourite) => (
+                <CocktailCard key={favourite.data?.idDrink} cocktail={favourite.data} onUnfavourite={onUnFavourite} />
+            ))
+            : <NoFavourites />
     )
 }
+
+const NoFavourites = () => {
+    return <div>
+        <h2 className="sub-title-text">{t("no_favourites")}</h2>
+    </div>;
+}
+
 
 export default FavouriteCocktails
 
