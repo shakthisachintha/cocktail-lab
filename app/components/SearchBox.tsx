@@ -1,7 +1,7 @@
 'use client';
 import { SearchOutlined } from '@ant-design/icons';
 import { useRef } from 'react';
-
+import './SearchBox.css';
 export interface Props {
     onChange: (text: string) => void;
 }

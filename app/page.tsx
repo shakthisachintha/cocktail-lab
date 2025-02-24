@@ -1,32 +1,20 @@
 'use client';
-import { fetchRandomCocktail } from '@/lib/cocktail-db-utils';
+import { numberFetchItemsInHomePage, siteTitle } from '@/lib/constants';
+import { useRandomInfiniteDrinks } from '@/lib/hooks';
 import { Cocktail } from '@/lib/types';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Button } from './components/Button';
 import CocktailCard from './components/CocktailCard';
 import GridContainer from './components/GridContainer';
+import { RedoOutlined } from '@ant-design/icons';
+import { t } from '@/i18n/locale_service';
 
-const NUMBER_FETCH_ITEMS = 5;
 
 export default function Home() {
-  // useInfiniteQuery fetches one cocktail per "page"
   const queryClient = useQueryClient();
-  const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching } = useInfiniteQuery<Cocktail>({
-    queryKey: ['randomCocktail'],
-    queryFn: async () => {
-      await new Promise<void>(res => setTimeout(() => res(), 1000));
-      return await fetchRandomCocktail();
-    },
-    // We'll use the page count simply to trigger the next page.
-    getNextPageParam: (lastPage, pages) => pages.length + 1,
-    initialPageParam: 1,
-    staleTime: Infinity,             // Keep data fresh indefinitely
-    refetchOnMount: false,           // Do not refetch when remounting
-    refetchOnWindowFocus: false,     // Do not refetch on window focus
-  });
+  const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching } = useRandomInfiniteDrinks();
 
-  // Flatten the pages into one list
   const allCocktails: Cocktail[] = data?.pages || [];
 
   // Filter out duplicates based on the cocktail's idDrink
@@ -37,7 +25,7 @@ export default function Home() {
 
   // If we don't have 5 unique cocktails yet, and we’re not already fetching, trigger the next fetch.
   useEffect(() => {
-    if (uniqueCocktails.length < NUMBER_FETCH_ITEMS && !isFetchingNextPage) {
+    if (uniqueCocktails.length < numberFetchItemsInHomePage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [uniqueCocktails, isFetchingNextPage, fetchNextPage]);
@@ -48,27 +36,32 @@ export default function Home() {
   };
 
   const RefreshButton = ({ loading, onClick }: { loading: boolean, onClick: () => void }) => {
-    return <Button loading={loading} onClick={onClick}>Refresh</Button>
+    return <Button icon={<RedoOutlined />} loading={loading} onClick={onClick}> </Button>
   };
 
-return (
-  <div>
-    <GridContainer
-      title='Cheers to a New Cocktail 🍹'
-      description='Click the refresh button to fetch new cocktails.'
-      extras={
-        <RefreshButton loading={isLoading || isFetching} onClick={handleRefresh} />
-      }
-    >
-      {uniqueCocktails.map((cocktail: Cocktail) => (
-        <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
-      ))}
-      {new Array(NUMBER_FETCH_ITEMS - uniqueCocktails.length)
-        .fill(null)
-        .map((_, idx) => (
-          <CocktailCard key={`placeholder-${idx}`} />
+  return (
+    <div>
+
+      <header className="landing-header">
+        <h1 className="">{t("welcome_text", [siteTitle])}</h1>
+        <p className="md:text-xl max-w-2xl mx-auto">{t("welcome_desc")}</p>
+      </header>
+
+      <GridContainer
+        title="Start Exploring"
+        description="Here are some random cocktails to get you started."
+        extras={<RefreshButton loading={isLoading || isFetching} onClick={handleRefresh} />}
+      >
+        {uniqueCocktails.map((cocktail: Cocktail) => (
+          <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
         ))}
-    </GridContainer>
-  </div>
-);
+        {new Array(numberFetchItemsInHomePage - uniqueCocktails.length)
+          .fill(null)
+          .map((_, idx) => (
+            <CocktailCard key={`placeholder-${idx}`} />
+          ))}
+      </GridContainer>
+
+    </div>
+  );
 }

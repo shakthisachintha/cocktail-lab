@@ -14,7 +14,7 @@ const GridContainer = ({ children, path, title, description, extras }: Props) =>
         <div className='grid-container'>
             {path && <BreadCrumbs items={path} />}
 
-            <div className='flex justify-between items-center'>
+            <div className='flex flex-col gap-5 sm:flex-row text-center sm:text-left justify-between items-center'>
                 {(title || description) && < div className="flex flex-col">
                     {title && <h1 className="page-title-text">{title}</h1>}
                     {description && <p className="page-desc-text">{description}</p>}

@@ -1,5 +1,6 @@
 import { RequestInit } from "next/dist/server/web/spec-extension/request";
 import { Cocktail } from "./types"
+import { searchCacheStaleTimeMins } from "./constants";
 
 const API_KEY = '1';
 const BASE_URL = `https://www.thecocktaildb.com/api/json/v1/${API_KEY}`;
@@ -19,7 +20,7 @@ export const fetchCocktailById = async (id: string): Promise<Cocktail> => {
 }
 
 export const searchCocktails = async (searchTerm: string): Promise<Cocktail[]> => {
-    return callApiWithErrorHandling(`/search.php?s=${searchTerm}`, { next: { revalidate: 300 }, cache: 'force-cache' });
+    return callApiWithErrorHandling(`/search.php?s=${searchTerm}`, { next: { revalidate: searchCacheStaleTimeMins * 60 }, cache: 'force-cache' });
 }
 
 export const fetchRandomCocktail = async (): Promise<Cocktail> => {

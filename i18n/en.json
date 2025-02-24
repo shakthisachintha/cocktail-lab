@@ -1,6 +1,9 @@
 {
     "home": "Home",
     "toggle_theme": "Toggle {1} Mode",
+    "refresh": "Refresh",
+    "welcome_text": "Welcome to {1}",
+    "welcome_desc": "Discover, explore, and enjoy an endless variety of handcrafted cocktails. Your next favorite drink awaits!",
 
     "favourites": "Favourites",
     "favourites_desc": "Your favourite drinks on Cocktail Labs.",
@@ -18,5 +21,8 @@
     "error_slug": "Things dont seem to be working at the moment",
     "error_id": "Error ID: {1}",
     "try_again": "Try Again",
-    "not_found_slug": "We can't find the page you're looking"
+    "not_found_slug": "We can't find the page you're looking",
+
+    "foot_note_1": "Cocktail Labs. All rights reserved.",
+    "foot_note_2": "Crafted with passion for cocktail enthusiasts around the world."
 }

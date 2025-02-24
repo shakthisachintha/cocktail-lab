@@ -2,7 +2,7 @@
 
 import { MoonOutlined, SunOutlined } from '@ant-design/icons';
 import React from 'react'
-import { ThemeContext } from '../../providers/ThemeProvider';
+import { ThemeContext } from '../../lib/providers/ThemeProvider';
 import { Button } from './Button';
 import { t } from '@/i18n/locale_service';
 

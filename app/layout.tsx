@@ -1,9 +1,11 @@
-import QueryClientProvider from '@/providers/QueryClientProvider'
+import QueryClientProvider from '@/lib/providers/QueryClientProvider'
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-import ThemeProvider from '../providers/ThemeProvider'
+import ThemeProvider from '../lib/providers/ThemeProvider'
 import NavBar from './components/NavBar'
 import './globals.css'
+import { siteTitle } from '@/lib/constants'
+import Footer from './components/Footer'
 
 const inter = Nunito({
   subsets: ['latin'],
@@ -21,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main className='container mx-auto px-2'>
               {children}
             </main>
+            <Footer />
           </QueryClientProvider>
         </ThemeProvider>
       </body>
@@ -30,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 
 export const metadata: Metadata = {
-  title: 'Cocktail Labs',
-  description: 'Cocktail Labs is a cocktail recipe app that fetches random cocktails from an API.',
+  title: siteTitle,
+  description: 'Cocktail Labs is a cocktail recipe app that fetches cocktails from theCocktailDB.com API.',
   keywords: ['cocktail', 'recipe', 'drink', 'alcohol'],
 }

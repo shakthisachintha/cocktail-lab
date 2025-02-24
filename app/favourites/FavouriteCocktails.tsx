@@ -1,11 +1,10 @@
 'use client';
-import { Cocktail } from '@/lib/types';
-import React, { useEffect, useState } from 'react'
-import CocktailCard from '../components/CocktailCard';
-import { useQueries } from '@tanstack/react-query';
-import { fetchCocktailById } from '@/lib/cocktail-db-utils';
-import { getFavouritesFromSessionStorage } from '@/lib/utils';
 import { t } from '@/i18n/locale_service';
+import { useFavouriteDrinks } from '@/lib/hooks';
+import { Cocktail } from '@/lib/types';
+import { getFavouritesFromSessionStorage } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import CocktailCard from '../components/CocktailCard';
 interface LoadingCocktail {
     isLoading: boolean,
     isPlaceholderData: boolean,
@@ -19,15 +18,7 @@ const FavouriteCocktails = () => {
         setFavouriteIds(getFavouritesFromSessionStorage());
     }, []);
 
-    const favouriteDrinks = useQueries({
-        queries: favouriteIds.map((id) => {
-            return {
-                queryKey: ['cocktail', id],
-                queryFn: () => fetchCocktailById(id),
-                staleTime: 1000 * 60 * 10
-            }
-        }),
-    });
+    const favouriteDrinks = useFavouriteDrinks(favouriteIds);
 
     const favourites: LoadingCocktail[] = favouriteDrinks.map((favourite) => ({
         isLoading: favourite.isLoading,
@@ -41,8 +32,8 @@ const FavouriteCocktails = () => {
 
     return (
         favourites.length > 0 ?
-            favourites.map((favourite) => (
-                <CocktailCard key={favourite.data?.idDrink} cocktail={favourite.data} onUnfavourite={onUnFavourite} />
+            favourites.map((favourite, idx) => (
+                <CocktailCard key={favourite.data?.idDrink || `fav-${idx}`} cocktail={favourite.data} onUnfavourite={onUnFavourite} />
             ))
             : <NoFavourites />
     )
