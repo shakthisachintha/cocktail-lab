@@ -1,8 +1,9 @@
 'use client';
-import { useEffect } from 'react';
-import { Cocktail } from '@/lib/types';
 import { fetchRandomCocktail } from '@/lib/cocktail-db-utils';
+import { Cocktail } from '@/lib/types';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { Button } from './components/Button';
 import CocktailCard from './components/CocktailCard';
 import GridContainer from './components/GridContainer';
 
@@ -47,35 +48,27 @@ export default function Home() {
   };
 
   const RefreshButton = ({ loading, onClick }: { loading: boolean, onClick: () => void }) => {
-    return (
-      <button
-        className={`btn ${loading ? 'btn-disabled' : ''}`}
-        onClick={onClick}
-        disabled={loading}
-      >
-        {loading ? "Refreshing ..." : 'Refresh'}
-      </button>
-    );
-  }
+    return <Button loading={loading} onClick={onClick}>Refresh</Button>
+  };
 
-  return (
-    <div>
-      <GridContainer
-        title='Cheers to a New Cocktail 🍹'
-        description='Click the refresh button to fetch new cocktails.'
-        extras={
-          <RefreshButton loading={isLoading || isFetching} onClick={handleRefresh} />
-        }
-      >
-        {uniqueCocktails.map((cocktail: Cocktail) => (
-          <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
+return (
+  <div>
+    <GridContainer
+      title='Cheers to a New Cocktail 🍹'
+      description='Click the refresh button to fetch new cocktails.'
+      extras={
+        <RefreshButton loading={isLoading || isFetching} onClick={handleRefresh} />
+      }
+    >
+      {uniqueCocktails.map((cocktail: Cocktail) => (
+        <CocktailCard key={cocktail.idDrink} cocktail={cocktail} />
+      ))}
+      {new Array(NUMBER_FETCH_ITEMS - uniqueCocktails.length)
+        .fill(null)
+        .map((_, idx) => (
+          <CocktailCard key={`placeholder-${idx}`} />
         ))}
-        {new Array(NUMBER_FETCH_ITEMS - uniqueCocktails.length)
-          .fill(null)
-          .map((_, idx) => (
-            <CocktailCard key={`placeholder-${idx}`} />
-          ))}
-      </GridContainer>
-    </div>
-  );
+    </GridContainer>
+  </div>
+);
 }

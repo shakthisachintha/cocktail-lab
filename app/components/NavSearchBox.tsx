@@ -3,19 +3,22 @@ import React from 'react'
 import SearchBox from './SearchBox';
 import { useRouter } from 'next/navigation'
 
-const NavSearchBox = () => {
+interface Props {
+    onNavigation?: () => void
+}
+
+const NavSearchBox = ({ onNavigation }: Props) => {
     const router = useRouter()
 
     const onSearch = (term: string) => {
+        onNavigation?.();
         const params = new URLSearchParams();
         params.set('s', term);
         router.push(`/search?${params.toString()}`);
     }
 
     return (
-        <div>
-            <SearchBox onChange={onSearch} />
-        </div>
+        <SearchBox onChange={onSearch} />
     )
 }
 

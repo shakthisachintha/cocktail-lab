@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito)
 }
 
 :root {
@@ -73,30 +73,6 @@ body {
   color: var(--light-dark-text-accent);
 }
 
-.icon-btn {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  font-size: calc(var(--font-size-large) * 1.5);
-  cursor: pointer;
-  transition: all 0.3s;
-  color: var(--color-blue-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    color: var(--color-blue);
-    background-color: var(--light-dark-bg-accent);
-  }
-}
-
-.navbar {
-  background-color: var(--light-dark-bg-shade);
-  color: var(--light-dark-text);
-  z-index: 100;
-}
-
 .search-input {
   border-radius: var(--default-border-radius);
   border: 1px solid var(--light-dark-bg-accent);
@@ -104,6 +80,7 @@ body {
   color: var(--light-dark-text);
   background-color: var(--light-dark-bg-accent);
   transition: border-color 0.3s;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -168,7 +145,7 @@ body {
 }
 
 .btn {
-  padding: 0.5rem 1rem;
+  padding: calc(var(--default-padding) / 1.5) var(--default-padding);
   border-radius: var(--default-border-radius);
   cursor: pointer;
   transition: all 0.3s;
@@ -176,6 +153,18 @@ body {
   color: var(--light-dark-text);
   background-color: var(--light-dark-bg-accent);
   border: 1px solid var(--light-dark-bg-accent);
+
+  &.icon-btn {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--default-margin) / 2);
+
+    .icon {
+      display: flex;
+      align-items: center;
+      font-size: var(--font-size-medium);
+    }
+  }
 
   &:hover {
     background-color: var(--color-blue-light);

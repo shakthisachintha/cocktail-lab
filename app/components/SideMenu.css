@@ -1,0 +1,64 @@
+.side-menu-container {
+    position: relative;
+    
+
+    /* The toggle icon (menu or close) */
+    .menu-toggle {
+       padding: 0;
+    }
+
+    .toggle-icon {
+        font-size: var(--font-size-xlarge);
+        color: var(--light-dark-text);
+        cursor: pointer;
+    }
+
+    /* The expandable side menu */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 85%;
+        height: 100vh;
+        background-color: var(--light-dark-bg-shade);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        padding: calc(var(--default-padding) / 1.5) var(--default-padding);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .side-menu ul {
+        list-style: none;
+    }
+
+    .side-menu li a {
+        display: block;
+        text-decoration: none;
+        color: var(--light-dark-text);
+        padding: calc(var(--default-padding) / 1.5) var(--default-padding);
+    }
+
+    .side-menu li a:hover {
+        background-color: var(--light-dark-bg-shade);
+    }
+
+    /* Back button styling at the bottom of the drawer */
+    .side-menu-back {
+        padding: 15px 20px;
+        border-top: 1px solid var(--light-dark-bg-shade);
+        text-align: center;
+    }
+
+    .side-menu-back button {
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: var(--light-dark-text-accent);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
