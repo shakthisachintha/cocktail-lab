@@ -1,39 +1,40 @@
 .cocktail-card {
-    color: var(--light-dark-text);
-    border-radius: var(--default-border-radius);
-    border: 1px solid var(--light-dark-bg-accent);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: var(--default-padding);
-  
-    .cover-image {
-      height: 20rem;
-      object-fit: cover;
-      border-top-left-radius: var(--default-border-radius);
-      border-top-right-radius: var(--default-border-radius);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  
-    .title-text {
-      color: var(--light-dark-text);
-      font-size: var(--font-size-large);
-      font-weight: bold;
-    }
-  
-    .category-text {
-      color: var(--light-dark-text-accent);
-      font-size: var(--font-size-medium);
-      margin: calc(var(--default-margin) / 2) 0;
-    }
-  
-    .instruction-text {
-      color: var(--light-dark-text);
-      font-size: var(--font-size-medium);
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      margin: var(--default-margin) 0;
-    }
+  color: var(--light-dark-text);
+  border-radius: var(--default-border-radius);
+  box-shadow: 0 4px 8px 0 var(--color-shadow-1), 0 6px 20px 0 var(--color-shadow-2);
+
+  .cover-image {
+    height: 20rem;
+    object-fit: cover;
+    border-radius: var(--default-border-radius) var(--default-border-radius) 0 0;
   }
+
+  .title-text {
+    color: var(--light-dark-text);
+    font-size: var(--font-size-xlarge);
+    font-weight: bold;
+  }
+
+  .category-text {
+    color: var(--light-dark-text-accent);
+    font-size: var(--font-size-medium);
+  }
+
+  .instruction-text {
+    color: var(--light-dark-text);
+    font-size: var(--font-size-medium);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: var(--default-margin) 0;
+  }
+
+  .error-text {
+    margin-bottom: var(--default-margin);
+    text-align: center;
+    font-size: var(--font-size-medium);
+    color: var(--light-dark-text-accent);
+  }
+}

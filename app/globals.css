@@ -19,6 +19,10 @@ body {
   --color-accent: #D32F2F;
   --color-accent-light: #FF7F66;
 
+  --color-shadow-1: light-dark(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2));
+  --color-shadow-2: light-dark(rgba(190, 190, 190, 0.6), rgba(0, 0, 0, 0.6));
+  --color-shadow-accent-light: #ff8066b1;
+
   --default-padding: 1rem;
   --default-margin: 1rem;
   --default-border-radius: 0.5rem;

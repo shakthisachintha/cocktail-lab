@@ -1,5 +1,5 @@
 'use client';
-import { numberFetchItemsInHomePage, siteTitle } from '@/lib/constants';
+import { numberFetchItemsInHomePage, QueryKeys, siteTitle } from '@/lib/constants';
 import { useRandomInfiniteDrinks } from '@/lib/hooks';
 import { Cocktail } from '@/lib/types';
 import { useQueryClient } from '@tanstack/react-query';
@@ -13,26 +13,22 @@ import { t } from '@/i18n/locale_service';
 
 export default function Home() {
   const queryClient = useQueryClient();
-  const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching } = useRandomInfiniteDrinks();
-
+  const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching, isPending, isError } = useRandomInfiniteDrinks();
   const allCocktails: Cocktail[] = data?.pages || [];
 
-  // Filter out duplicates based on the cocktail's idDrink
   const uniqueCocktails = allCocktails.filter(
     (cocktail, index, self) =>
       index === self.findIndex((c) => c.idDrink === cocktail.idDrink)
   );
 
-  // If we don't have 5 unique cocktails yet, and we’re not already fetching, trigger the next fetch.
   useEffect(() => {
-    if (uniqueCocktails.length < numberFetchItemsInHomePage && !isFetchingNextPage) {
+    if ((!isFetchingNextPage && !isPending && !isError) && uniqueCocktails.length < numberFetchItemsInHomePage) {
       fetchNextPage();
     }
-  }, [uniqueCocktails, isFetchingNextPage, fetchNextPage]);
+  }, [uniqueCocktails, isFetchingNextPage, fetchNextPage, isError, isPending]);
 
-  // Refresh button handler that resets the query, causing it to refetch
   const handleRefresh = () => {
-    queryClient.resetQueries({ queryKey: ['randomCocktail'] });
+    queryClient.resetQueries({ queryKey: [QueryKeys.randomCocktails] });
   };
 
   const RefreshButton = ({ loading, onClick }: { loading: boolean, onClick: () => void }) => {
@@ -58,7 +54,7 @@ export default function Home() {
         {new Array(numberFetchItemsInHomePage - uniqueCocktails.length)
           .fill(null)
           .map((_, idx) => (
-            <CocktailCard key={`placeholder-${idx}`} />
+            <CocktailCard hasError={isError} key={`placeholder-${idx}`} />
           ))}
       </GridContainer>
 

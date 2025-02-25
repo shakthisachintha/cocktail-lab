@@ -23,6 +23,7 @@
     "error_id": "Error ID: {1}",
     "try_again": "Try Again",
     "not_found_slug": "We can't find the page you're looking",
+    "cocktail_error": "We couldn't load this cocktail. Please try again later.",
 
     "foot_note_1": "Cocktail Labs. All rights reserved.",
     "foot_note_2": "Crafted with passion for cocktail enthusiasts around the world.",

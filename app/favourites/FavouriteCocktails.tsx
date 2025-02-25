@@ -8,7 +8,8 @@ import CocktailCard from '../components/CocktailCard';
 interface LoadingCocktail {
     isLoading: boolean,
     isPlaceholderData: boolean,
-    data?: Cocktail
+    data?: Cocktail,
+    error: boolean
 }
 
 const FavouriteCocktails = () => {
@@ -24,6 +25,7 @@ const FavouriteCocktails = () => {
         isLoading: favourite.isLoading,
         isPlaceholderData: favourite.isPlaceholderData,
         data: favourite.data,
+        error: favourite.isError,
     }));
 
     const onUnFavourite = (id: string) => {
@@ -33,7 +35,7 @@ const FavouriteCocktails = () => {
     return (
         favourites.length > 0 ?
             favourites.map((favourite, idx) => (
-                <CocktailCard key={favourite.data?.idDrink || `fav-${idx}`} cocktail={favourite.data} onUnfavourite={onUnFavourite} />
+                <CocktailCard hasError={favourite.error} key={favourite.data?.idDrink || `fav-${idx}`} cocktail={favourite.data} onUnfavourite={onUnFavourite} />
             ))
             : <NoFavourites />
     )

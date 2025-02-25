@@ -23,8 +23,8 @@
   }
 
   &:focus-within {
-    -webkit-box-shadow: 0px 0px 5px 0px #ff806683;
-    -moz-box-shadow: 0px 0px 5px 0px #ff806683;
-    box-shadow: 0px 0px 5px 0px #ff806683
+    -webkit-box-shadow: 0px 0px 5px 0px var(--color-shadow-accent-light);
+    -moz-box-shadow: 0px 0px 5px 0px var(--color-shadow-accent-light);
+    box-shadow: 0px 0px 5px 0px var(--color-shadow-accent-light)
   }
 }

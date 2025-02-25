@@ -4,7 +4,6 @@ import { Nunito } from 'next/font/google'
 import ThemeProvider from '../lib/providers/ThemeProvider'
 import NavBar from './components/NavBar'
 import './globals.css'
-import "../build.css"
 import { siteTitle } from '@/lib/constants'
 import Footer from './components/Footer'
 

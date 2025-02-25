@@ -19,5 +19,6 @@ export const StaticImageAssets = {
 export const QueryKeys = {
     cocktailById: (id: string) => ['cocktail', id],
     searchCocktails: (query: string) => ['search', query],
-    favouriteDrinks: 'favourites'
+    favouriteDrinks: 'favourites',
+    randomCocktails: 'randomCocktails'
 }

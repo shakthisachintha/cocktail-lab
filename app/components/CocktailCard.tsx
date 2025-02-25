@@ -4,18 +4,20 @@ import FavouriteButton from './FavouriteButton'
 import ImageWithFallback from './ImageWithFallback'
 import './CocktailCard.css'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { t } from "@/i18n/locale_service"
 
 interface Props {
     cocktail?: Cocktail
-    onUnfavourite?: (id: string) => void
+    onUnfavourite?: (id: string) => void,
+    hasError?: boolean
 }
 
-export default function CocktailCard({ cocktail, onUnfavourite }: Props) {
+export default function CocktailCard({ cocktail, onUnfavourite, hasError }: Props) {
 
     if (!cocktail) {
         return <div className='cocktail-card'>
-            <Skeleton height={250} />
-            <div className='flex flex-col mt-5'>
+            <Skeleton className="cover-image" height={250} />
+            <div className='flex flex-col p-5'>
                 <div className='flex justify-between mb-2'>
                     <div>
                         <Skeleton width={200} height={30} />
@@ -27,6 +29,7 @@ export default function CocktailCard({ cocktail, onUnfavourite }: Props) {
                     <Skeleton count={2} />
                 </div>
             </div>
+            {hasError && <p className='error-text'>{t("cocktail_error")}</p>}
         </div>
     }
 

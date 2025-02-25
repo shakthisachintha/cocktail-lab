@@ -15,15 +15,14 @@ export const useFavouriteDrinks = (favouriteIds: string[]) => useQueries({
 
 
 export const useRandomInfiniteDrinks = () => useInfiniteQuery<Cocktail>({
-    queryKey: ['randomCocktail'],
+    queryKey: [QueryKeys.randomCocktails],
     queryFn: async () => {
         await new Promise<void>(res => setTimeout(() => res(), 1000));
         return await fetchRandomCocktail();
     },
-    // We'll use the page count simply to trigger the next page.
     getNextPageParam: (lastPage, pages) => pages.length + 1,
     initialPageParam: 1,
-    staleTime: Infinity,             // Keep data fresh indefinitely
-    refetchOnMount: false,           // Do not refetch when remounting
-    refetchOnWindowFocus: false,     // Do not refetch on window focus
+    staleTime: Infinity,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
 });
