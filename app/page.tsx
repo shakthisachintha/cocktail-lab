@@ -3,7 +3,7 @@ import { numberFetchItemsInHomePage, QueryKeys, siteTitle } from '@/lib/constant
 import { useRandomInfiniteDrinks } from '@/lib/hooks';
 import { Cocktail } from '@/lib/types';
 import { useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button } from './components/Button';
 import CocktailCard from './components/CocktailCard';
 import GridContainer from './components/GridContainer';
@@ -12,14 +12,21 @@ import { t } from '@/i18n/locale_service';
 
 
 export default function Home() {
+  const previousCocktails = useRef<string[]>([]);
   const queryClient = useQueryClient();
   const { data, fetchNextPage, isFetchingNextPage, isLoading, isFetching, isPending, isError } = useRandomInfiniteDrinks();
   const allCocktails: Cocktail[] = data?.pages || [];
 
-  const uniqueCocktails = allCocktails.filter(
-    (cocktail, index, self) =>
-      index === self.findIndex((c) => c.idDrink === cocktail.idDrink)
-  );
+  const uniqueCocktails = allCocktails.filter((cocktail) => {
+    if (previousCocktails.current.includes(cocktail.idDrink)) {
+      return false;
+    }
+    return true;
+  });
+
+  uniqueCocktails.forEach((cocktail) => {
+    queryClient.setQueryData(QueryKeys.cocktailById(cocktail.idDrink), cocktail);
+  });
 
   useEffect(() => {
     if ((!isFetchingNextPage && !isPending && !isError) && uniqueCocktails.length < numberFetchItemsInHomePage) {
@@ -28,6 +35,10 @@ export default function Home() {
   }, [uniqueCocktails, isFetchingNextPage, fetchNextPage, isError, isPending]);
 
   const handleRefresh = () => {
+    previousCocktails.current = [
+      ...previousCocktails.current,
+      ...uniqueCocktails.map((cocktail) => cocktail.idDrink)
+    ];
     queryClient.resetQueries({ queryKey: [QueryKeys.randomCocktails] });
   };
 

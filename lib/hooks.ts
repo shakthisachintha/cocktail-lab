@@ -13,11 +13,20 @@ export const useFavouriteDrinks = (favouriteIds: string[]) => useQueries({
     }),
 });
 
+export const useNrandomCocktails = (n: number) => useQueries({
+    queries: Array.from({ length: n }, () => {
+        return {
+            queryKey: [QueryKeys.randomCocktails],
+            queryFn: async () => {
+                return await fetchRandomCocktail();
+            },
+        }
+    }),
+});
 
 export const useRandomInfiniteDrinks = () => useInfiniteQuery<Cocktail>({
     queryKey: [QueryKeys.randomCocktails],
     queryFn: async () => {
-        await new Promise<void>(res => setTimeout(() => res(), 1000));
         return await fetchRandomCocktail();
     },
     getNextPageParam: (lastPage, pages) => pages.length + 1,

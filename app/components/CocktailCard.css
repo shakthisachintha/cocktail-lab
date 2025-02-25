@@ -1,7 +1,7 @@
 .cocktail-card {
   color: var(--light-dark-text);
   border-radius: var(--default-border-radius);
-  box-shadow: 0 4px 8px 0 var(--color-shadow-1), 0 6px 20px 0 var(--color-shadow-2);
+  box-shadow: 0 4px 8px 0 var(--color-shadow-1), 0 6px 10px 0 var(--color-shadow-2);
 
   .cover-image {
     height: 20rem;
