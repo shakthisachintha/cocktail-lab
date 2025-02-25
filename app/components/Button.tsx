@@ -10,10 +10,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children?: React.ReactNode
 }
 
-export const Button = ({ loading, onClick, icon, children, disabled, className }: Props) => {
+export const Button = ({ loading, onClick, icon, children, disabled, className, ...rest }: Props) => {
     const isDisabled = loading || disabled;
     return (
-        <button className={`btn ${className} ${isDisabled && 'btn-disabled'} ${(icon || loading) && 'icon-btn'}`}
+        <button {...rest} className={`btn ${className} ${isDisabled && 'btn-disabled'} ${(icon || loading) && 'icon-btn'}`}
             onClick={onClick} disabled={loading}>
             {loading && <Loading3QuartersOutlined spin className='icon' />}
             {(!loading && icon) && <span className="icon">{icon}</span>}

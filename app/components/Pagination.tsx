@@ -25,8 +25,8 @@ const Pagination = ({ total, perPage, currentPage }: Props) => {
     return (
         <div className="flex flex-col sm:flex-row items-center gap-2 p-2">
             <div className="flex items-center gap-2">
-                <Button disabled={currentPage === 1} icon={<LeftOutlined />} onClick={() => changePage(1)} />
-                <Button disabled={currentPage === 1} icon={<CaretLeftOutlined />} onClick={() => changePage(currentPage - 1)} />
+                <Button disabled={currentPage === 1} icon={<LeftOutlined />} onClick={() => changePage(1)} aria-label="first-page" />
+                <Button disabled={currentPage === 1} icon={<CaretLeftOutlined />} onClick={() => changePage(currentPage - 1)} aria-label="previous-page" />
             </div>
 
             <div className="flex items-center gap-2 overflow-x-auto">
@@ -49,8 +49,8 @@ const Pagination = ({ total, perPage, currentPage }: Props) => {
             </div>
 
             <div className="flex items-center gap-2">
-                <Button disabled={pageCount === currentPage} icon={<CaretRightOutlined />} onClick={() => changePage(currentPage + 1)} />
-                <Button disabled={pageCount === currentPage} icon={<RightOutlined />} onClick={() => changePage(pageCount)} />
+                <Button disabled={pageCount === currentPage} icon={<CaretRightOutlined />} onClick={() => changePage(currentPage + 1)} aria-label="next-page" />
+                <Button disabled={pageCount === currentPage} icon={<RightOutlined />} onClick={() => changePage(pageCount)} aria-label='last-page' />
             </div>
         </div>
     );
